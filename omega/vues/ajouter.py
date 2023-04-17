@@ -39,6 +39,7 @@ def create_frame(parent):
     combo_classe.place(relx=0.2,rely=0.20)
     element_classe=tk.StringVar()
     element_classe=combo_classe.get()
+    
 
     element_sexe=tk.StringVar()
     label_sexe=tk.Label(formulaire,text="_______________SEXE_______________",bg="#808040")

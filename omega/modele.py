@@ -16,14 +16,14 @@ class database:
             id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
             nom TEXT,
             prenom TEXT,
-            age INTEGER,
+            age TEXT,
             classe TEXT,
-            sexe INTEGER,
-            matricule INTEGER,
-            statut INTEGER,
+            sexe TEXT,
+            matricule TEXT,
+            statut TEXT,
             shirt TEXT,
-            pointure INTEGER,
-            tel INTEGER);
+            pointure TEXT,
+            tel TEXTE);
             """
         )
         self.cur.execute(req)
@@ -50,7 +50,7 @@ class database:
             # f"DELETE FROM beneficiaires WHERE ROWID IN (SELECT MAX(ROWID) FROM beneficiaires)")
         # self.connexion.commit()
 
-    def resume(self,type):
+    def resume(self,type,frame):
         if type=="par Age":
             cinq=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='5'").fetchone()[0]
             six=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='6'").fetchone()[0]
@@ -79,7 +79,37 @@ class database:
             XL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XL'").fetchone()[0]
             XXL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XXL'").fetchone()[0]
         elif type=="par Pointure":
-            print("bonjour")
+            p20=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='20'").fetchone()[0]
+            
+            p22=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='22'").fetchone()[0]
+            
+            p24=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='24'").fetchone()[0]
+            p25=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='25'").fetchone()[0]
+            p26=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='26'").fetchone()[0]
+            p27=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='27'").fetchone()[0]
+            p28=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='28'").fetchone()[0]
+            p29=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='29'").fetchone()[0]
+            p30=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='30'").fetchone()[0]
+            p31=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='31'").fetchone()[0]
+            p32=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='32'").fetchone()[0]
+           
+            p34=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='34'").fetchone()[0]
+            p35=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='35'").fetchone()[0]
+
+            p37=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='37'").fetchone()[0]
+            p38=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='38'").fetchone()[0]
+            p39=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='39'").fetchone()[0]
+            p40=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='40'").fetchone()[0]
+
+            p42=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='42'").fetchone()[0]
+            p43=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='43'").fetchone()[0]
+            p44=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='44'").fetchone()[0]
+            p45=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='45'").fetchone()[0]
+            p46=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='46'").fetchone()[0]
+            p47=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='47'").fetchone()[0]
+            p48=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='48'").fetchone()[0]
+            p49=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='49'").fetchone()[0]
+            p50=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='50'").fetchone()[0]
 
         elif type=="par Statut":
             actif=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='actif'").fetchone()[0]

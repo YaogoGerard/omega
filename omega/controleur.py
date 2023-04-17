@@ -4,10 +4,12 @@ from tkinter import messagebox
 from . import modele 
 individu=modele.database()
 def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel):
-    if len(nom)==0 or len(prenom)==0 or len(age)==0 or len(classe)==0 or len(sexe)==0 or len(matricule)==0 or len(statut)==0:
+    
+    if len(nom)==0:
         root=tk.Tk()
         root.withdraw()
         messagebox.showinfo("info","veuillez remplir tout les champs")
+        print(nom)
     else:
         individu.ajouter(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel)
         nom.set()==""    
@@ -17,3 +19,5 @@ def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,t
         matricule.set()=="" 
         shirt.set()==""
 
+def resumer(type):
+    individu.resume(type)
