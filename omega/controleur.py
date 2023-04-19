@@ -5,7 +5,8 @@ from . import modele
 individu=modele.database()
 def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel):
     
-    if len(nom)==0:
+    if nom.get() :
+        #or prenom.get() or age.get() or classe.get() or sexe.get() or matricule.get() or statut.get() or shirt.get() or pointure.get() or tel.get()
         root=tk.Tk()
         root.withdraw()
         messagebox.showinfo("info","veuillez remplir tout les champs")

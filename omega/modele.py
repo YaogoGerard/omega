@@ -30,18 +30,11 @@ class database:
         self.connexion.commit()
 
     def ajouter(self, nom, prenom, age, classe, sexe, matricule, statut, shirt, pointure, tel):
-        nom_c = str(nom)
-        prenom_c = str(prenom)
-
-        classe_c = str(classe)
-        sexe_c = str(sexe)
-
-        statut_c = str(statut)
-        shirt_c = str(shirt)
+       
 
         sql = "INSERT INTO beneficiaires(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel) VALUES(?,?,?,?,?,?,?,?,?,?)"
-        data = (nom_c, prenom_c, age, classe_c, sexe_c,
-                matricule, statut_c, shirt_c, pointure, tel)
+        data = (nom , prenom, age, classe, sexe,
+                matricule, statut, shirt, pointure, tel)
         self.cur.execute(sql, data)
         self.connexion.commit()
 
@@ -52,6 +45,8 @@ class database:
 
     def resume(self,type,frame):
         if type=="par Age":
+            
+
             cinq=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='5'").fetchone()[0]
             six=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='6'").fetchone()[0]
             sept=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='7'").fetchone()[0]
@@ -115,7 +110,7 @@ class database:
             actif=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='actif'").fetchone()[0]
             revoyer=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='renvoyé'").fetchone()[0]
 
-
+        
 
     def __del__(self):
         self.connexion.close()
