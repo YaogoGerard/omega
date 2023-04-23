@@ -30,7 +30,16 @@ class database:
         self.connexion.commit()
 
     def ajouter(self, nom, prenom, age, classe, sexe, matricule, statut, shirt, pointure, tel):
-       
+        nom=str(nom)
+        prenom=str(prenom)
+        age=str(age)
+        classe=str(classe)
+        sexe=str(sexe)
+        matricule=str(matricule)
+        statut=str(statut)
+        shirt=str(shirt)
+        pointure=str(pointure)
+        tel=str(tel)
 
         sql = "INSERT INTO beneficiaires(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel) VALUES(?,?,?,?,?,?,?,?,?,?)"
         data = (nom , prenom, age, classe, sexe,
@@ -44,10 +53,13 @@ class database:
         # self.connexion.commit()
 
     def resume(self,type,frame):
+        type=str(type)
         if type=="par Age":
-            
+            titre_age=tk.Label(frame,text="PAR AGE")
+            titre_age.pack()
 
             cinq=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='5'").fetchone()[0]
+            
             six=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='6'").fetchone()[0]
             sept=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='7'").fetchone()[0]
             huit=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='8'").fetchone()[0]
