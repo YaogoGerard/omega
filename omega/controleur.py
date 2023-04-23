@@ -17,4 +17,5 @@ def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,t
        
 
 def resumer(type,frame):
+
     individu.resume(type,frame)
