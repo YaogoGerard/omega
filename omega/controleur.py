@@ -5,7 +5,7 @@ from . import modele
 individu=modele.database()
 def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel):
     
-    if nom.get()=="" :
+    if not nom :
         #or prenom.get() or age.get() or classe.get() or sexe.get() or matricule.get() or statut.get() or shirt.get() or pointure.get() or tel.get()
         root=tk.Tk()
         root.withdraw()
@@ -14,6 +14,10 @@ def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,t
         root.destroy()
     else:
         individu.ajouter(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel)
+        messagebox.showinfo("info","Enregistrement reussit!")
+        
+        
+
        
 
 def resumer(type,frame):

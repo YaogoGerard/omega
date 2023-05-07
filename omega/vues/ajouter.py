@@ -90,7 +90,7 @@ def create_frame(parent):
    
    
    
-    button_valider=tk.Button(formulaire,text="VALIDER",width=30,height=3,command=lambda:controleur.ajouter_element(nom=nom_entry,prenom=prenom_entry,age=age_entry,classe=combo_classe,sexe=element_sexe,matricule=matricule_entry,statut=element_statut,shirt=combo_shirt,pointure=pointure_entry,tel=tel_entry))
+    button_valider=tk.Button(formulaire,text="VALIDER",width=30,height=3,command=lambda:controleur.ajouter_element(nom=nom_entry.get(),prenom=prenom_entry.get(),age=age_entry.get(),classe=combo_classe.get(),sexe=element_sexe.get(),matricule=matricule_entry.get(),statut=element_statut.get(),shirt=combo_shirt.get(),pointure=pointure_entry.get(),tel=tel_entry.get()))
     button_valider.place(relx=0.25,rely=0.87)
     return ajouter
 
