@@ -33,7 +33,7 @@ def create_frame(parent):
     label_classe=tk.Label(formulaire,text="CLASSE",bg="#808040")
     label_classe.place(relx=0.1,rely=0.20)
     classe_liste=[
-    "CP1","CP2","CE1","CE2","CM1","CM2","6eme","5eme","4eme","3eme","2nde","1ère","Tl","université"
+    "CP1","CP2","CE1","CE2","CM1","CM2","6eme","5eme","4eme","3eme","2nde","1ère","Tle","université"
     ]
     
     combo_classe=ttk.Combobox(formulaire,values=classe_liste)
@@ -74,7 +74,7 @@ def create_frame(parent):
     combo_shirt=ttk.Combobox(formulaire,width=5,values=shirt_liste)
     combo_shirt.place(relx=0.18,rely=0.65)
     
-    element_shirt=combo_shirt.get()
+    
     label_pointure=tk.Label(formulaire,text="POINTURE",bg="#808040")
     label_pointure.place(relx=0.35,rely=0.65)
     
@@ -90,7 +90,7 @@ def create_frame(parent):
    
    
    
-    button_valider=tk.Button(formulaire,text="VALIDER",width=30,height=3,command=lambda:controleur.ajouter_element(nom=nom_entry.get(),prenom=prenom_entry.get(),age=age_entry.get(),classe=combo_classe.get(),sexe=element_sexe.get(),matricule=matricule_entry.get(),statut=element_statut.get(),shirt=combo_shirt.get(),pointure=pointure_entry.get(),tel=tel_entry.get()))
+    button_valider=tk.Button(formulaire,text="VALIDER",width=30,height=3,command=lambda:controleur.ajouter_element(nom=nom_entry.get(),prenom=prenom_entry.get(),age=age_entry.get(),classe=combo_classe.get(),sexe=element_sexe.get(),matricule=matricule_entry.get(),statut=element_statut.get(),shirt=combo_shirt.get(),pointure=pointure_entry.get(),tel=tel_entry.get(),a=nom_entry,b=prenom_entry,c=age_entry,d=combo_classe,e=radiosexeF,f=radiosexeM,g=matricule_entry,h=check_renvoyer,i=check_actif,j=combo_shirt,k=pointure_entry,l=tel_entry))
     button_valider.place(relx=0.25,rely=0.87)
     return ajouter
 
