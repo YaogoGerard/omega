@@ -55,7 +55,7 @@ class database:
     def resume(self,type,frame):
         type=str(type)
         if type=="par Age":
-            titre_age=tk.Label(frame,text="PAR AGE")
+            titre_age=tk.Label(frame,text="PAR AGE",bg="#800040")
             titre_age.pack()
 
             cinq=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='5'").fetchone()[0]
@@ -78,14 +78,20 @@ class database:
             vingt_un=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='21'").fetchone()[0]
             vingt_deux=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='22'").fetchone()[0]
         elif type=="par sexe":
+            titre_sexe=tk.Label(frame,text="PAR SEXE",bg="#800040")
+            titre_sexe.pack()
             femme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='femme'").fetchone()[0]
             homme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='homme'").fetchone()[0]  
         elif type=="par Shirt":
+            titre_shirt=tk.Label(frame,text="PAR SHIRT",bg="#800040")
+            titre_shirt.pack()
             M=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='M'").fetchone()[0]
             L=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='L'").fetchone()[0]
             XL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XL'").fetchone()[0]
             XXL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XXL'").fetchone()[0]
         elif type=="par Pointure":
+            titre_pointure=tk.Label(frame,text="PAR POINTURE",bg="#800040")
+            titre_pointure.pack()
             p20=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='20'").fetchone()[0]
             
             p22=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='22'").fetchone()[0]
@@ -119,8 +125,14 @@ class database:
             p50=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='50'").fetchone()[0]
 
         elif type=="par Statut":
+            titre_statut=tk.Label(frame,text="PAR STATUT")
+            titre_statut.pack()
             actif=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='actif'").fetchone()[0]
+            actif_number=tk.Label(frame,text="Actifs:")
+            actif_number.pack()
             revoyer=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='renvoyé'").fetchone()[0]
+            renvoyer_number=tk.Label(frame,text="Renvoyés:")
+            renvoyer_number.pack()
 
         
 

@@ -6,7 +6,7 @@ individu=modele.database()
 def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel,a,b,c,d,e,f,g,h,i,j,k,l):
     
     if not nom :
-        #or prenom.get() or age.get() or classe.get() or sexe.get() or matricule.get() or statut.get() or shirt.get() or pointure.get() or tel.get()
+        #or not prenom or not age or not classe or not sexe or not matricule or not statut or not shirt or not pointure or not tel
         root=tk.Tk()
         root.withdraw()
         messagebox.showinfo("info","veuillez remplir tout les champs")
@@ -34,5 +34,6 @@ def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,t
        
 
 def resumer(type,frame):
-
+    for widget in frame.winfo_children():
+        widget.destroy()
     individu.resume(type,frame)
