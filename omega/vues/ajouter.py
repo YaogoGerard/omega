@@ -43,9 +43,9 @@ def create_frame(parent):
     element_sexe=tk.StringVar()
     label_sexe=tk.Label(formulaire,text="_______________SEXE_______________",bg="#808040")
     label_sexe.place(relx=0.1,rely=0.25)
-    radiosexeF=tk.Radiobutton(formulaire,variable=element_sexe,text="FEMME",bg="#808040",value="femme")
+    radiosexeF=tk.Radiobutton(formulaire,variable=element_sexe,text="FEMININ",bg="#808040",value="femme")
     radiosexeF.place(relx=0.1,rely=0.30)
-    radiosexeM=tk.Radiobutton(formulaire,variable=element_sexe,text="HOMME",bg="#808040",value="homme")
+    radiosexeM=tk.Radiobutton(formulaire,variable=element_sexe,text="MASCULIN",bg="#808040",value="homme")
     radiosexeM.place(relx=0.35,rely=0.30)
 
   
