@@ -24,7 +24,7 @@ def create_frame(parent):
     conteneur_de_affichage.pack(side="left",expand="true",fill="both")
 
     yscrollbar=ttk.Scrollbar(conteneur_de_affichage,orient="vertical")
-    yscrollbar.pack(side="left",fill="y")
+    yscrollbar.pack(side="right",fill="y")
 
     xscrollbar=ttk.Scrollbar(conteneur_de_affichage,orient="horizontal")
     xscrollbar.pack(side="bottom",fill="x")
