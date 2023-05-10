@@ -5,7 +5,7 @@ from .. import controleur
 def create_frame(parent):
     resume = tk.Frame(parent, bg="#800040")
     
-    combo_value=["par Age","par sexe","par Shirt","par Pointure","par Statut"]
+    combo_value=["par Age","par Genre","par Shirt","par Pointure","par Statut"]
     combo_choice=ttk.Combobox(resume,values=combo_value)
     combo_choice.pack(padx=1.5)
 

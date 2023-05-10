@@ -130,18 +130,30 @@ class database:
             vingt_deux_number=tk.Label(frame,text="22 ANS : "+str(vingt_deux))
             vingt_deux_number.place(x=400,y=285)
 
-        elif type=="par sexe":
-            titre_sexe=tk.Label(frame,text="PAR SEXE",bg="#800040")
-            titre_sexe.pack()
+        elif type=="par Genre":
+            titre_sexe=tk.Label(frame,text="***********PAR GENRE**********")
+            titre_sexe.place(x=300,y=10)
             femme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='femme'").fetchone()[0]
-            homme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='homme'").fetchone()[0]  
+            femme_number=tk.Label(frame,text="FEMME : "+str(femme))
+            femme_number.place(x=300,y=50)
+            homme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='homme'").fetchone()[0] 
+            homme_number=tk.Label(frame,text="HOMME : "+str(homme))
+            homme_number.place(x=300,y=90) 
         elif type=="par Shirt":
-            titre_shirt=tk.Label(frame,text="PAR SHIRT",bg="#800040")
-            titre_shirt.pack()
+            titre_shirt=tk.Label(frame,text="**********PAR SHIRT**********")
+            titre_shirt.place(x=400,y=20)
             M=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='M'").fetchone()[0]
+            M_number=tk.Label(frame,text="shirt M : "+str(M))
+            M_number.place(x=400,y=50)
             L=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='L'").fetchone()[0]
+            L_number=tk.Label(frame,text="shirt L : "+str(L))
+            L_number.place(x=400,y=70)
             XL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XL'").fetchone()[0]
+            XL_number=tk.Label(frame,text="shirt XL : "+str(XL))
+            XL_number.place(x=400,y=90)
             XXL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XXL'").fetchone()[0]
+            XXL_number=tk.Label(frame,text="shirt XXL : "+str(XXL))
+            XXL_number.place(x=400,y=105)
         elif type=="par Pointure":
             titre_pointure=tk.Label(frame,text="PAR POINTURE",bg="#800040")
             titre_pointure.pack()
@@ -179,7 +191,7 @@ class database:
 
         elif type=="par Statut":
             titre_statut=tk.Label(frame,text="*********PAR STATUT**********")
-            titre_statut.place(x=400,y=100)
+            titre_statut.place(x=350,y=100)
             actif=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='actif'").fetchone()[0]
             actif_number=tk.Label(frame,text="Actifs: "+ str(actif))
             actif_number.place(x=300,y=200)
