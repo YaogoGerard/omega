@@ -1,5 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+from .. import controleur
 
 def create_frame(parent):
     rechercher = tk.Frame(parent, bg="#800040")
@@ -12,8 +13,25 @@ def create_frame(parent):
     champs=tk.Entry(barre,justify="center",width=80,relief="sunken")
     champs.grid(column=2,row=0)
 
+    # Gestion d'affichage
+
     affichage=tk.Frame(rechercher)
     affichage.pack(side="left",expand="true",fill="both")
-    resultats = ttk.Treeview(rechercher)
+
+    # Gestion du treeview
+
+    conteneur_de_affichage=tk.Frame(rechercher)
+    conteneur_de_affichage.pack(side="left",expand="true",fill="both")
+
+    yscrollbar=ttk.Scrollbar(conteneur_de_affichage,orient="vertical")
+    yscrollbar.pack(side="left",fill="y")
+
+    xscrollbar=ttk.Scrollbar(conteneur_de_affichage,orient="horizontal")
+    xscrollbar.pack(side="bottom",fill="x")
+
+    resultats = ttk.Treeview(conteneur_de_affichage)
     resultats.pack(side="right",expand="true",fill="both")
+    resultats.heading('#0',text="Nom et Prenom")
+    
+    controleur.remplir_treeview(resultats)
     return rechercher

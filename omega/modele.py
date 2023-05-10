@@ -29,6 +29,16 @@ class database:
         self.cur.execute(req)
         self.connexion.commit()
 
+    def remplir_treeview(self,tree):
+        for row in tree.get_children():
+            tree.delete(row) 
+        
+        self.cur.execute("SELECT nom,prenom FROM beneficiaires")
+        donnees=self.cur.fetchall()
+        for element in donnees:
+            nom_prenom=element[0]+" "+element[1]
+            tree.insert("","end",text=nom_prenom)
+
     def ajouter(self, nom, prenom, age, classe, sexe, matricule, statut, shirt, pointure, tel):
         nom=str(nom)
         prenom=str(prenom)
@@ -47,11 +57,7 @@ class database:
         self.cur.execute(sql, data)
         self.connexion.commit()
 
-    # def arriere(self):
-        # self.cur.execute(
-            # f"DELETE FROM beneficiaires WHERE ROWID IN (SELECT MAX(ROWID) FROM beneficiaires)")
-        # self.connexion.commit()
-
+   
     def resume(self,type,frame):
         type=str(type)
         if type=="par Age":

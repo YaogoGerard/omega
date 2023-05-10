@@ -3,6 +3,10 @@ import tkinter as tk
 from tkinter import messagebox
 from . import modele 
 individu=modele.database()
+
+def remplir_treeview(tree):
+    individu.remplir_treeview(tree)
+
 def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel,a,b,c,d,e,f,g,h,i,j,k,l):
     
     if not nom :
@@ -29,10 +33,6 @@ def ajouter_element(nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,t
         l.delete(0,tk.END)
         
         
-        
-
-       
-
 def resumer(type,frame):
     for widget in frame.winfo_children():
         widget.destroy()

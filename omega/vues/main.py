@@ -7,7 +7,7 @@ from . import info
 
 # Création de la fenêtre principale
 root = tk.Tk()
-root.minsize(width=1024,height=700)
+root.minsize(width=800,height=600)
 # Création du frame de menu
 menu_frame = tk.Frame(root,bg="#808040")
 menu_frame.pack(side="left",fill="y")
