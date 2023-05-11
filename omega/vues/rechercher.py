@@ -14,7 +14,7 @@ def create_frame(parent):
 
     champs=tk.Entry(barre,justify="center",width=80,relief="sunken")
     champs.grid(column=2,row=0)
-    champs.bind('<KeyRelease>',lambda event:controleur.rechercher(champs,resultats))
+    champs.bind('<KeyRelease>',lambda event:controleur.rechercher(champs.get(),resultats))
 
     # Gestion d'affichage
 

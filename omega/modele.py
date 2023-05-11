@@ -28,6 +28,8 @@ class database:
         )
         self.cur.execute(req)
         self.connexion.commit()
+        
+
     def afficher(self,event):
         item=event.widget.selection()[0]
         nom, prenom = item.split()
@@ -39,11 +41,17 @@ class database:
 
 
     def rechercher(self,entree,treev):
-        recherche=entree.get()
-        if recherche=="":
-            self.cur.execute("SELECT nom, prenom FROM beneficiaires ")   
+        
+        if not entree:
+            self.cur.execute("SELECT nom, prenom FROM beneficiaires ")
+            donnees=self.cur.fetchall()
+            for element in donnees:
+                nom_prenom=element[0]+" "+element[1]
+                treev.insert("","end",text=nom_prenom)
+
+
         else:
-            self.cur.execute("SELECT nom, prenom FROM beneficiaires WHERE nom LIKE ? or prenom LIKE ?",(f'%{recherche}',f'%{recherche}'))
+            self.cur.execute("SELECT nom, prenom FROM beneficiaires WHERE nom LIKE ? or prenom LIKE ?",(f'{entree}%',f'{entree}%'))
             treev.delete(*treev.get_children())
             for row in self.cur.fetchall():
                 nom_prenom=f'{row[0]} {row[1]}'
