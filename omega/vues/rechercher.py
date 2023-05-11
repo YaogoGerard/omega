@@ -6,12 +6,15 @@ def create_frame(parent):
     rechercher = tk.Frame(parent, bg="#800040")
     barre=tk.Frame(rechercher,bg="#800040")
     barre.pack(pady="20")
-    b1=tk.Button(barre,text="RECHERCHER")
+    b1=tk.Button(barre,text="RECHERCHER",command=lambda:controleur.rechercher(champs,resultats))
     b1.grid(column=0,row=0)
     space=tk.Label(barre,width=5, bg="#800040")
     space.grid(column=1,row=0)
+    # Gestion de l'entry
+
     champs=tk.Entry(barre,justify="center",width=80,relief="sunken")
     champs.grid(column=2,row=0)
+    champs.bind('<KeyRelease>',lambda event:controleur.rechercher(champs,resultats))
 
     # Gestion d'affichage
 
@@ -32,6 +35,7 @@ def create_frame(parent):
     resultats = ttk.Treeview(conteneur_de_affichage)
     resultats.pack(side="right",expand="true",fill="both")
     resultats.heading('#0',text="Nom et Prenom")
+    resultats.bind('<ButtonRelease-1>',controleur.afficher)
     
     controleur.remplir_treeview(resultats)
     return rechercher

@@ -4,6 +4,11 @@ from tkinter import messagebox
 from . import modele 
 individu=modele.database()
 
+def afficher(event):
+    individu.afficher(event)
+def rechercher(entree,treev):
+    individu.rechercher(entree,treev)
+
 def remplir_treeview(tree):
     individu.remplir_treeview(tree)
 

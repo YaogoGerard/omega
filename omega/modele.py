@@ -28,6 +28,27 @@ class database:
         )
         self.cur.execute(req)
         self.connexion.commit()
+    def afficher(self,event):
+        item=event.widget.selection()[0]
+        nom, prenom = item.split()
+        self.cur.execute("SELECT * FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
+        resultat=self.cur.fetchone()
+        nom, prenom, age, classe, sexe, matricule, statut, shirt, pointure, tel = resultat
+        print(f"nom: {nom}")
+        print(f"nom: {age}")
+
+
+    def rechercher(self,entree,treev):
+        recherche=entree.get()
+        if recherche=="":
+            self.cur.execute("SELECT nom, prenom FROM beneficiaires ")   
+        else:
+            self.cur.execute("SELECT nom, prenom FROM beneficiaires WHERE nom LIKE ? or prenom LIKE ?",(f'%{recherche}',f'%{recherche}'))
+            treev.delete(*treev.get_children())
+            for row in self.cur.fetchall():
+                nom_prenom=f'{row[0]} {row[1]}'
+                treev.insert("","end",text=nom_prenom)
+
 
     def remplir_treeview(self,tree):
         for row in tree.get_children():
@@ -62,148 +83,220 @@ class database:
         type=str(type)
         if type=="par Age":
             titre_age=tk.Label(frame,text="**********PAR AGE**********")
-            titre_age.pack()
+            titre_age.place(x=220,y=10)
 
             cinq=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='5'").fetchone()[0]
             cinq_number=tk.Label(frame,text="5 ANS : "+str(cinq))
-            cinq_number.place(x=400,y=30)
+            cinq_number.place(x=250,y=30)
             
             six=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='6'").fetchone()[0]
             six_number=tk.Label(frame,text="6 ANS : "+str(six))
-            six_number.place(x=400,y=45)
+            six_number.place(x=250,y=45)
 
             sept=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='7'").fetchone()[0]
             sept_number=tk.Label(frame,text="7 ANS : "+str(sept))
-            sept_number.place(x=400,y=60)
+            sept_number.place(x=250,y=60)
 
             huit=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='8'").fetchone()[0]
             huit_number=tk.Label(frame,text="8 ANS : "+str(huit))
-            huit_number.place(x=400,y=75)
+            huit_number.place(x=250,y=75)
 
             neuf=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='9'").fetchone()[0]
             neuf_number=tk.Label(frame,text="9 ANS : "+str(neuf))
-            neuf_number.place(x=400,y=90)
+            neuf_number.place(x=250,y=90)
 
             dix=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='10'").fetchone()[0]
             dix_number=tk.Label(frame,text="10 ANS : "+str(dix))
-            dix_number.place(x=400,y=105)
+            dix_number.place(x=250,y=105)
 
             onze=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='11'").fetchone()[0]
             onze_number=tk.Label(frame,text="11 ANS : "+str(onze))
-            onze_number.place(x=400,y=120)
+            onze_number.place(x=250,y=120)
 
             douze=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='12'").fetchone()[0]
             douze_number=tk.Label(frame,text="12 ANS : "+str(douze))
-            douze_number.place(x=400,y=135)
+            douze_number.place(x=250,y=135)
 
             treize=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='13'").fetchone()[0]
             treize_number=tk.Label(frame,text="13 ANS : "+str(treize))
-            treize_number.place(x=400,y=150)
+            treize_number.place(x=250,y=150)
 
             quatorze=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='14'").fetchone()[0]
             quatorze_number=tk.Label(frame,text="14 ANS : "+str(quatorze))
-            quatorze_number.place(x=400,y=165)
+            quatorze_number.place(x=250,y=165)
 
             quinze=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='15'").fetchone()[0]
             quinze_number=tk.Label(frame,text="15 ANS : "+str(quinze))
-            quinze_number.place(x=400,y=180)
+            quinze_number.place(x=250,y=180)
 
             seize=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='16'").fetchone()[0]
             seize_number=tk.Label(frame,text="16 ANS : "+str(seize))
-            seize_number.place(x=400,y=195)
+            seize_number.place(x=250,y=195)
 
             dix_sept=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='17'").fetchone()[0]
             dix_sept_number=tk.Label(frame,text="17 ANS : "+str(dix_sept))
-            dix_sept_number.place(x=400,y=210)
+            dix_sept_number.place(x=250,y=210)
 
             dix_huit=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='18'").fetchone()[0]
             dix_huit_number=tk.Label(frame,text="18 ANS : "+str(dix_huit))
-            dix_huit_number.place(x=400,y=225)
+            dix_huit_number.place(x=250,y=225)
             
             dix_neuf=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='19'").fetchone()[0]
             dix_neuf_number=tk.Label(frame,text="19 ANS : "+str(dix_neuf))
-            dix_neuf_number.place(x=400,y=240)
+            dix_neuf_number.place(x=250,y=240)
 
             vingt=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='20'").fetchone()[0]
             vingt_number=tk.Label(frame,text="20 ANS : "+str(vingt))
-            vingt_number.place(x=400,y=255)
+            vingt_number.place(x=250,y=255)
 
             vingt_un=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='21'").fetchone()[0]
             vingt_un_number=tk.Label(frame,text="21 ANS : "+str(vingt_un))
-            vingt_un_number.place(x=400,y=270)
+            vingt_un_number.place(x=250,y=270)
 
             vingt_deux=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where age='22'").fetchone()[0]
             vingt_deux_number=tk.Label(frame,text="22 ANS : "+str(vingt_deux))
-            vingt_deux_number.place(x=400,y=285)
+            vingt_deux_number.place(x=250,y=285)
 
         elif type=="par Genre":
             titre_sexe=tk.Label(frame,text="***********PAR GENRE**********")
-            titre_sexe.place(x=300,y=10)
+            titre_sexe.place(x=210,y=10)
             femme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='femme'").fetchone()[0]
             femme_number=tk.Label(frame,text="FEMME : "+str(femme))
-            femme_number.place(x=300,y=50)
+            femme_number.place(x=250,y=50)
             homme=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where sexe='homme'").fetchone()[0] 
             homme_number=tk.Label(frame,text="HOMME : "+str(homme))
-            homme_number.place(x=300,y=90) 
+            homme_number.place(x=250,y=90) 
         elif type=="par Shirt":
             titre_shirt=tk.Label(frame,text="**********PAR SHIRT**********")
-            titre_shirt.place(x=400,y=20)
+            titre_shirt.place(x=210,y=20)
             M=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='M'").fetchone()[0]
             M_number=tk.Label(frame,text="shirt M : "+str(M))
-            M_number.place(x=400,y=50)
+            M_number.place(x=250,y=50)
             L=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='L'").fetchone()[0]
             L_number=tk.Label(frame,text="shirt L : "+str(L))
-            L_number.place(x=400,y=70)
+            L_number.place(x=250,y=70)
             XL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XL'").fetchone()[0]
             XL_number=tk.Label(frame,text="shirt XL : "+str(XL))
-            XL_number.place(x=400,y=90)
+            XL_number.place(x=250,y=90)
             XXL=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where shirt='XXL'").fetchone()[0]
-            XXL_number=tk.Label(frame,text="shirt XXL : "+str(XXL))
-            XXL_number.place(x=400,y=105)
+            XXL_number=tk.Label(frame,text="Shirt XXL: "+str(XXL))
+            XXL_number.place(x=250,y=110)
         elif type=="par Pointure":
-            titre_pointure=tk.Label(frame,text="PAR POINTURE",bg="#800040")
-            titre_pointure.pack()
+            titre_pointure=tk.Label(frame,text="**********PAR POINTURE**********")
+            titre_pointure.place(x=210,y=7)
             p20=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='20'").fetchone()[0]
+            p20_number=tk.Label(frame,text="pointure 20 : "+str(p20))
+            p20_number.place(x=250,y=27)
             
             p22=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='22'").fetchone()[0]
+            p22_number=tk.Label(frame,text="Pointure 22:" +str(p22))
+            p22_number.place(x=250,y=45)
             
             p24=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='24'").fetchone()[0]
+            p24_number=tk.Label(frame,text="Pointure 24:" +str(p24))
+            p24_number.place(x=250,y=60)
+
             p25=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='25'").fetchone()[0]
+            p25_number=tk.Label(frame,text="Pointure 25:" +str(p25))
+            p25_number.place(x=250,y=75)
+
             p26=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='26'").fetchone()[0]
+            p26_number=tk.Label(frame,text="Pointure 26:" +str(p26))
+            p26_number.place(x=250,y=90)
+
             p27=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='27'").fetchone()[0]
+            p27_number=tk.Label(frame,text="Pointure 27:" +str(p27))
+            p27_number.place(x=250,y=105)
+
             p28=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='28'").fetchone()[0]
+            p28_number=tk.Label(frame,text="Pointure 28:" +str(p28))
+            p28_number.place(x=250,y=120)
+
             p29=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='29'").fetchone()[0]
+            p29_number=tk.Label(frame,text="Pointure 29:" +str(p29))
+            p29_number.place(x=250,y=135)
+
             p30=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='30'").fetchone()[0]
+            p30_number=tk.Label(frame,text="Pointure 30:" +str(p30))
+            p30_number.place(x=250,y=150)
+
             p31=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='31'").fetchone()[0]
+            p31_number=tk.Label(frame,text="Pointure 31: "+str(p31))
+            p31_number.place(x=250,y=165)
+
             p32=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='32'").fetchone()[0]
+            p32_number=tk.Label(frame,text="Pointure 32: "+str(p32))
+            p32_number.place(x=250,y=180)
            
             p34=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='34'").fetchone()[0]
+            p34_number=tk.Label(frame,text="Pointure 34: "+str(p34))
+            p34_number.place(x=250,y=195)
+
             p35=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='35'").fetchone()[0]
+            p35_number=tk.Label(frame,text="Pointure 35: "+str(p35))
+            p35_number.place(x=250,y=210)
 
             p37=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='37'").fetchone()[0]
+            p37_number=tk.Label(frame,text="Pointure 37: "+str(p37))
+            p37_number.place(x=250,y=225)
+
             p38=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='38'").fetchone()[0]
+            p38_number=tk.Label(frame,text="Pointure 38: "+str(p38))
+            p38_number.place(x=250,y=240)
+
             p39=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='39'").fetchone()[0]
+            p39_number=tk.Label(frame,text="Pointure 39: "+str(p39))
+            p39_number.place(x=250,y=255)
+
             p40=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='40'").fetchone()[0]
+            p40_number=tk.Label(frame,text="Pointure 40: "+str(p40))
+            p40_number.place(x=250,y=270)
 
             p42=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='42'").fetchone()[0]
+            p42_number=tk.Label(frame,text="Pointure 42: "+str(p42))
+            p42_number.place(x=250,y=285)
+
             p43=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='43'").fetchone()[0]
+            p43_number=tk.Label(frame,text="Pointure 43: "+str(p43))
+            p43_number.place(x=250,y=300)
+
             p44=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='44'").fetchone()[0]
+            p44_number=tk.Label(frame,text="Pointure 44: "+str(p44))
+            p44_number.place(x=250,y=315)
+
             p45=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='45'").fetchone()[0]
+            p45_number=tk.Label(frame,text="Pointure 45: "+str(p45))
+            p45_number.place(x=250,y=330)
+
             p46=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='46'").fetchone()[0]
+            p46_number=tk.Label(frame,text="Pointure 46: "+str(p46))
+            p46_number.place(x=250,y=345)
+
             p47=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='47'").fetchone()[0]
+            p47_number=tk.Label(frame,text="Pointure 47: "+str(p47))
+            p47_number.place(x=250,y=360)
+
             p48=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='48'").fetchone()[0]
+            p48_number=tk.Label(frame,text="Pointure 48: "+str(p48))
+            p48_number.place(x=250,y=375)
+
             p49=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='49'").fetchone()[0]
+            p49_number=tk.Label(frame,text="Pointure 49: "+str(p49))
+            p49_number.place(x=250,y=390)
+
             p50=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where pointure='50'").fetchone()[0]
+            p50_number=tk.Label(frame,text="Pointure 50: "+str(p50))
+            p50_number.place(x=250,y=405)
 
         elif type=="par Statut":
             titre_statut=tk.Label(frame,text="*********PAR STATUT**********")
-            titre_statut.place(x=350,y=100)
+            titre_statut.place(x=250,y=10)
             actif=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='actif'").fetchone()[0]
             actif_number=tk.Label(frame,text="Actifs: "+ str(actif))
-            actif_number.place(x=300,y=200)
+            actif_number.place(x=250,y=30)
             renvoyer=self.cur.execute("SELECT COUNT(*) FROM beneficiaires where statut='renvoyé'").fetchone()[0]
             renvoyer_number=tk.Label(frame,text="Renvoyés: "+str(renvoyer))
-            renvoyer_number.place(x=500,y=200)
+            renvoyer_number.place(x=250,y=45)
 
         
 

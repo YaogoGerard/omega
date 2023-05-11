@@ -13,7 +13,7 @@ def create_frame(parent):
     trier.pack(padx=1.7)
 
     recapitulatif=tk.Frame(resume)
-    recapitulatif.pack(ipadx=400,ipady=300,padx=15,fill="y",expand=True)
+    recapitulatif.pack(ipadx=300,ipady=300,padx=15,fill="y",expand=True)
 
     
     
