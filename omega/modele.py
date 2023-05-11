@@ -44,6 +44,7 @@ class database:
         
         if not entree:
             self.cur.execute("SELECT nom, prenom FROM beneficiaires ")
+            treev.delete(*treev.get_children())
             donnees=self.cur.fetchall()
             for element in donnees:
                 nom_prenom=element[0]+" "+element[1]
