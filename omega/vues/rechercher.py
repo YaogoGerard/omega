@@ -35,7 +35,8 @@ def create_frame(parent):
     resultats = ttk.Treeview(conteneur_de_affichage)
     resultats.pack(side="right",expand="true",fill="both")
     resultats.heading('#0',text="Nom et Prenom")
-    resultats.bind('<ButtonRelease-1>',controleur.afficher)
+    
+    resultats.bind('<ButtonRelease-1>',lambda event:controleur.afficher(resultats))
     
     controleur.remplir_treeview(resultats)
     return rechercher

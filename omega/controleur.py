@@ -4,8 +4,9 @@ from tkinter import messagebox
 from . import modele 
 individu=modele.database()
 
-def afficher(event):
-    individu.afficher(event)
+def afficher(resultats):
+    individu.afficher(resultats)
+
 def rechercher(entree,treev):
     individu.rechercher(entree,treev)
 

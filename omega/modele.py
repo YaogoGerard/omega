@@ -28,16 +28,13 @@ class database:
         )
         self.cur.execute(req)
         self.connexion.commit()
-        
 
-    def afficher(self,event):
-        item=event.widget.selection()[0]
-        nom, prenom = item.split()
-        self.cur.execute("SELECT * FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
-        resultat=self.cur.fetchone()
-        nom, prenom, age, classe, sexe, matricule, statut, shirt, pointure, tel = resultat
-        print(f"nom: {nom}")
-        print(f"nom: {age}")
+    
+
+    def afficher(self,treew):
+        selection =treew.focus()
+        valeur=treew.item(selection,"values")
+        print(valeur)
 
 
     def rechercher(self,entree,treev):
@@ -49,8 +46,6 @@ class database:
             for element in donnees:
                 nom_prenom=element[0]+" "+element[1]
                 treev.insert("","end",text=nom_prenom)
-
-
         else:
             self.cur.execute("SELECT nom, prenom FROM beneficiaires WHERE nom LIKE ? or prenom LIKE ?",(f'{entree}%',f'{entree}%'))
             treev.delete(*treev.get_children())
@@ -62,12 +57,12 @@ class database:
     def remplir_treeview(self,tree):
         for row in tree.get_children():
             tree.delete(row) 
-        
         self.cur.execute("SELECT nom,prenom FROM beneficiaires")
         donnees=self.cur.fetchall()
         for element in donnees:
             nom_prenom=element[0]+" "+element[1]
             tree.insert("","end",text=nom_prenom)
+    
 
     def ajouter(self, nom, prenom, age, classe, sexe, matricule, statut, shirt, pointure, tel):
         nom=str(nom)
