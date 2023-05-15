@@ -4,8 +4,10 @@ from tkinter import messagebox
 from . import modele 
 individu=modele.database()
 
-def afficher(resultats):
-    individu.afficher(resultats)
+def afficher(resultats,conteneur):
+    for widget in conteneur.winfo_children():
+        widget.destroy()
+    individu.afficher(resultats,conteneur)
 
 def rechercher(entree,treev):
     individu.rechercher(entree,treev)

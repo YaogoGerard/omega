@@ -31,10 +31,15 @@ class database:
 
     
 
-    def afficher(self,treew):
-        selection =treew.focus()
-        valeur=treew.item(selection,"values")
-        print(valeur)
+    def afficher(self,treew,conteneur):
+       
+        valeur=treew.item(treew.selection())["text"]
+        nom,prenom=valeur.split(" ")
+        self.cur.execute("SELECT nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
+        donnees=self.cur.fetchall()
+        label_nom=tk.Label(conteneur,text="NOM: "+donnees[0][0])
+        label_nom.pack()
+        print(donnees[0][0])
 
 
     def rechercher(self,entree,treev):
