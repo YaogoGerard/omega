@@ -144,10 +144,9 @@ class database:
 
 
         def supprimer():
-            self.cur.execute(
-                "DELETE FROM beneficiaires WHERE nom=? AND prenom=?", (nom, prenom))
-        modifie = tk.Button(conteneur, text="MODIFIER",
-                            command=lambda: modifier(conteneur))
+            self.cur.execute("DELETE FROM beneficiaires WHERE nom=? AND prenom=?", (nom, prenom))
+            
+        modifie = tk.Button(conteneur, text="MODIFIER",command=lambda: modifier(conteneur))
         modifie.pack(side="left")
         supprime = tk.Button(conteneur, text="SUPPRIMER", command=supprimer())
         supprime.pack(side="right")
