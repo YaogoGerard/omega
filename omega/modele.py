@@ -1,6 +1,7 @@
 import sqlite3
 import tkinter as tk
 import os
+from tkinter import ttk
 # creation d'une classe pour la base de données
 
 
@@ -58,14 +59,98 @@ class database:
         label_pointure.pack()
         label_tel=tk.Label(conteneur,text="TELEPHONE: "+donnees[0][9])
         label_tel.pack()
-        def modifier():
-            print("")
+
+        def modifier(boite):
+            changement = tk.Toplevel(boite, bg="#808040", width=500,height=500)
+            changement.pack_propagate()
+            label_nom = tk.Label(changement, text="NOM", bg="#808040")
+            label_nom.place(relx=0.1, rely=0.05)
+            nom_entry = tk.Entry(changement, width=15)
+            nom_entry.place(relx=0.18, rely=0.05)
+
+            label_prenom = tk.Label(changement, text="PRENOM", bg="#808040")
+            label_prenom.place(relx=0.1, rely=0.1)
+            prenom_entry = tk.Entry(changement, width=30)
+            prenom_entry.place(relx=0.22, rely=0.1)
+
+            label_age = tk.Label(changement, text="AGE", bg="#808040")
+            label_age.place(relx=0.1, rely=0.15)
+            age_entry = tk.Entry(changement, width=5)
+            age_entry.place(relx=0.16, rely=0.15)
+
+            label_classe = tk.Label(changement, text="CLASSE", bg="#808040")
+            label_classe.place(relx=0.1, rely=0.20)
+            classe_liste = [
+                "CP1", "CP2", "CE1", "CE2", "CM1", "CM2", "6eme", "5eme", "4eme", "3eme", "2nde", "1ère", "Tle", "université"
+            ]
+
+            combo_classe = ttk.Combobox(changement, values=classe_liste)
+            combo_classe.place(relx=0.2, rely=0.20)
+
+            element_sexe = tk.StringVar()
+            label_sexe = tk.Label(
+                changement, text="_______________SEXE_______________", bg="#808040")
+            label_sexe.place(relx=0.1, rely=0.25)
+            radiosexeF = tk.Radiobutton(
+                changement, variable=element_sexe, text="FEMININ", bg="#808040", value="femme")
+            radiosexeF.place(relx=0.1, rely=0.30)
+            radiosexeM = tk.Radiobutton(
+                changement, variable=element_sexe, text="MASCULIN", bg="#808040", value="homme")
+            radiosexeM.place(relx=0.35, rely=0.30)
+
+            label_matricule = tk.Label(
+                changement, text="MATRICULE", bg="#808040")
+            label_matricule.place(relx=0.1, rely=0.40)
+            matricule_entry = tk.Entry(changement, width=15)
+            matricule_entry.place(relx=0.25, rely=0.40)
+
+            element_statut = tk.StringVar()
+            label_statut = tk.Label(
+                changement, text="______________STATUT______________", bg="#808040")
+            label_statut.place(relx=0.1, rely=0.47)
+            check_renvoyer = tk.Checkbutton(
+                changement, variable=element_statut, text="renvoyé", bg="#808040", onvalue="renvoyé")
+            check_renvoyer.place(relx=0.1, rely=0.52)
+            check_actif = tk.Checkbutton(
+                changement, variable=element_statut, text="actif", bg="#808040", onvalue="actif")
+            check_actif.place(relx=0.35, rely=0.52)
+
+            label_mesure = tk.Label(
+                changement, text="______________MESURE_____________", bg="#808040")
+            label_mesure.place(relx=0.1, rely=0.60)
+
+            label_shirt = tk.Label(changement, text="SHIRT", bg="#808040")
+            label_shirt.place(relx=0.1, rely=0.65)
+            shirt_liste = ["M", "L", "S", "XL", "XXL"]
+
+            combo_shirt = ttk.Combobox(changement, width=5, values=shirt_liste)
+            combo_shirt.place(relx=0.18, rely=0.65)
+
+            label_pointure = tk.Label(
+                changement, text="POINTURE", bg="#808040")
+            label_pointure.place(relx=0.35, rely=0.65)
+
+            pointure_entry = tk.Entry(changement, width=5)
+            pointure_entry.place(relx=0.48, rely=0.65)
+
+            label_tel = tk.Label(changement, text="TEL", bg="#808040")
+            label_tel.place(relx=0.1, rely=0.75)
+            tel_entry = tk.Entry(changement, width=12)
+            tel_entry.place(relx=0.15, rely=0.75)
+            annuler= tk.Button(changement, text="ANNULER", command=lambda:changement.destroy())
+            annuler.place(relx=0.15, rely=0.90)
+            valider= tk.Button(changement, text="ANNULER")
+            valider.place(relx=0.75, rely=0.90)
+
+
         def supprimer():
-            self.cur.execute("DELETE FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
-        modifie=tk.Button(conteneur,text="MODIFIER")
-        modifie.pack(side="left") 
-        supprime=tk.Button(conteneur,text="SUPPRIMER")
-        supprime.pack(side="right")   
+            self.cur.execute(
+                "DELETE FROM beneficiaires WHERE nom=? AND prenom=?", (nom, prenom))
+        modifie = tk.Button(conteneur, text="MODIFIER",
+                            command=lambda: modifier(conteneur))
+        modifie.pack(side="left")
+        supprime = tk.Button(conteneur, text="SUPPRIMER", command=supprimer())
+        supprime.pack(side="right")
 
     def rechercher(self,entree,treev):
         
