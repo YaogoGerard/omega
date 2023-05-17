@@ -58,7 +58,14 @@ class database:
         label_pointure.pack()
         label_tel=tk.Label(conteneur,text="TELEPHONE: "+donnees[0][9])
         label_tel.pack()
-
+        def modifier():
+            print("")
+        def supprimer():
+            self.cur.execute("DELETE FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
+        modifie=tk.Button(conteneur,text="MODIFIER")
+        modifie.pack(side="left") 
+        supprime=tk.Button(conteneur,text="SUPPRIMER")
+        supprime.pack(side="right")   
 
     def rechercher(self,entree,treev):
         
