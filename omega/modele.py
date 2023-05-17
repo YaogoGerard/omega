@@ -37,9 +37,27 @@ class database:
         nom,prenom=valeur.split(" ")
         self.cur.execute("SELECT nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
         donnees=self.cur.fetchall()
+        
         label_nom=tk.Label(conteneur,text="NOM: "+donnees[0][0])
         label_nom.pack()
-        print(donnees[0][0])
+        label_prenom=tk.Label(conteneur,text="PRENOM: "+donnees[0][1])
+        label_prenom.pack()
+        label_age=tk.Label(conteneur,text="AGE: "+donnees[0][2])
+        label_age.pack()
+        label_classe=tk.Label(conteneur,text="CLASSE: "+donnees[0][3])
+        label_classe.pack()
+        label_genre=tk.Label(conteneur,text="GENRE: "+donnees[0][4])
+        label_genre.pack()
+        label_matricule=tk.Label(conteneur,text="MATRICULE: "+donnees[0][5])
+        label_matricule.pack()
+        label_statut=tk.Label(conteneur,text="STATUT: "+donnees[0][6])
+        label_statut.pack()
+        label_shirt=tk.Label(conteneur,text="SHIRT: "+donnees[0][7])
+        label_shirt.pack()
+        label_pointure=tk.Label(conteneur,text="POINTURE: "+donnees[0][8])
+        label_pointure.pack()
+        label_tel=tk.Label(conteneur,text="TELEPHONE: "+donnees[0][9])
+        label_tel.pack()
 
 
     def rechercher(self,entree,treev):
