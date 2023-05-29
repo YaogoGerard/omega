@@ -5,6 +5,7 @@ from . import resume
 from . import aide
 from . import info
 
+
 # Création de la fenêtre principale
 root = tk.Tk()
 root.minsize(width=800,height=600)

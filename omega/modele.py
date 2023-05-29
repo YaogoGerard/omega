@@ -2,6 +2,8 @@ import sqlite3
 import tkinter as tk
 import os
 from tkinter import ttk
+from tkinter import messagebox
+
 # creation d'une classe pour la base de données
 
 
@@ -31,12 +33,12 @@ class database:
         self.connexion.commit()
 
     
-
+     
     def afficher(self,treew,conteneur):
        
         valeur=treew.item(treew.selection())["text"]
         nom,prenom=valeur.split(" ")
-        self.cur.execute("SELECT nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
+        self.cur.execute("SELECT nom,prenom,age,classe,sexe,matricule,statut,shirt,pointure,tel,id FROM beneficiaires WHERE nom=? AND prenom=?",(nom,prenom))
         donnees=self.cur.fetchall()
         
         label_nom=tk.Label(conteneur,text="NOM: "+donnees[0][0])
@@ -66,16 +68,19 @@ class database:
             label_nom = tk.Label(changement, text="NOM", bg="#808040")
             label_nom.place(relx=0.1, rely=0.05)
             nom_entry = tk.Entry(changement, width=15)
+            nom_entry.insert(0,donnees[0][0])
             nom_entry.place(relx=0.18, rely=0.05)
 
             label_prenom = tk.Label(changement, text="PRENOM", bg="#808040")
             label_prenom.place(relx=0.1, rely=0.1)
             prenom_entry = tk.Entry(changement, width=30)
+            prenom_entry.insert(0,donnees[0][1])
             prenom_entry.place(relx=0.22, rely=0.1)
 
             label_age = tk.Label(changement, text="AGE", bg="#808040")
             label_age.place(relx=0.1, rely=0.15)
             age_entry = tk.Entry(changement, width=5)
+            age_entry.insert(0,donnees[0][2])
             age_entry.place(relx=0.16, rely=0.15)
 
             label_classe = tk.Label(changement, text="CLASSE", bg="#808040")
@@ -83,11 +88,12 @@ class database:
             classe_liste = [
                 "CP1", "CP2", "CE1", "CE2", "CM1", "CM2", "6eme", "5eme", "4eme", "3eme", "2nde", "1ère", "Tle", "université"
             ]
-
             combo_classe = ttk.Combobox(changement, values=classe_liste)
+            combo_classe.set(donnees[0][3])
             combo_classe.place(relx=0.2, rely=0.20)
 
             element_sexe = tk.StringVar()
+            
             label_sexe = tk.Label(
                 changement, text="_______________SEXE_______________", bg="#808040")
             label_sexe.place(relx=0.1, rely=0.25)
@@ -97,11 +103,13 @@ class database:
             radiosexeM = tk.Radiobutton(
                 changement, variable=element_sexe, text="MASCULIN", bg="#808040", value="homme")
             radiosexeM.place(relx=0.35, rely=0.30)
+            
 
             label_matricule = tk.Label(
                 changement, text="MATRICULE", bg="#808040")
             label_matricule.place(relx=0.1, rely=0.40)
             matricule_entry = tk.Entry(changement, width=15)
+            matricule_entry.insert(0,donnees[0][5])
             matricule_entry.place(relx=0.25, rely=0.40)
 
             element_statut = tk.StringVar()
@@ -114,6 +122,7 @@ class database:
             check_actif = tk.Checkbutton(
                 changement, variable=element_statut, text="actif", bg="#808040", onvalue="actif")
             check_actif.place(relx=0.35, rely=0.52)
+            
 
             label_mesure = tk.Label(
                 changement, text="______________MESURE_____________", bg="#808040")
@@ -124,6 +133,7 @@ class database:
             shirt_liste = ["M", "L", "S", "XL", "XXL"]
 
             combo_shirt = ttk.Combobox(changement, width=5, values=shirt_liste)
+            combo_shirt.set(donnees[0][7])
             combo_shirt.place(relx=0.18, rely=0.65)
 
             label_pointure = tk.Label(
@@ -131,24 +141,70 @@ class database:
             label_pointure.place(relx=0.35, rely=0.65)
 
             pointure_entry = tk.Entry(changement, width=5)
+            pointure_entry.insert(0,donnees[0][8])
             pointure_entry.place(relx=0.48, rely=0.65)
 
             label_tel = tk.Label(changement, text="TEL", bg="#808040")
             label_tel.place(relx=0.1, rely=0.75)
             tel_entry = tk.Entry(changement, width=12)
+            tel_entry.insert(0,donnees[0][9])
             tel_entry.place(relx=0.15, rely=0.75)
             annuler= tk.Button(changement, text="ANNULER", command=lambda:changement.destroy())
             annuler.place(relx=0.15, rely=0.90)
-            valider= tk.Button(changement, text="ANNULER")
+            valider= tk.Button(changement, text="VALIDER",command=lambda:validation())
             valider.place(relx=0.75, rely=0.90)
+            def validation():
+                nouveau_nom = nom_entry.get()
+                nouveau_prenom = prenom_entry.get()
+                nouveau_age = age_entry.get()
+                nouveau_classe = combo_classe.get()
+                nouveau_matricule = matricule_entry.get()             
+                nouveau_shirt = combo_shirt.get()
+                nouveau_pointure = pointure_entry.get()
+                nouveau_tel = tel_entry.get()
+
+                
+                self.cur.execute("UPDATE beneficiaires SET nom=?, prenom=?, age=?, classe=?, matricule=?,shirt=?, pointure=?, tel=? WHERE nom=? AND prenom=?",
+                                (nouveau_nom, nouveau_prenom, nouveau_age, nouveau_classe, nouveau_matricule, nouveau_shirt, nouveau_pointure, nouveau_tel, nom, prenom))
+                self.connexion.commit()
+                changement.destroy()
+                
+               
+                changement.destroy()
+
+                messagebox.showinfo("Mise à jour réussie", "Les informations ont été mises à jour avec succès.")
+                treew.delete(*treew.get_children())
+                self.cur.execute("SELECT nom, prenom FROM beneficiaires")
+                donnees = self.cur.fetchall()
+                for element in donnees:
+                    nom_prenom = element[0] + " " + element[1]
+                    treew.insert("", "end", text=nom_prenom)
+                for widget in conteneur.winfo_children():
+                    widget.destroy()
+                
+                
+                
+
 
 
         def supprimer():
             self.cur.execute("DELETE FROM beneficiaires WHERE nom=? AND prenom=?", (nom, prenom))
+            root=tk.Tk()
+            root.withdraw()
+            messagebox.showinfo("Suppression réussie", "Le bénéficiaire a été supprimé avec succès.")
+            root.destroy()
+            for item in treew.get_children():
+                treew.delete(item)
+            self.cur.execute("SELECT nom,prenom FROM beneficiaires")
+            donnees=self.cur.fetchall()
+            for element in donnees:
+                nom_prenom=element[0]+" "+element[1]
+                treew.insert("","end",text=nom_prenom)
+            
             
         modifie = tk.Button(conteneur, text="MODIFIER",command=lambda: modifier(conteneur))
         modifie.pack(side="left")
-        supprime = tk.Button(conteneur, text="SUPPRIMER", command=supprimer())
+        supprime = tk.Button(conteneur, text="SUPPRIMER", command=lambda:supprimer())
         supprime.pack(side="right")
 
     def rechercher(self,entree,treev):
