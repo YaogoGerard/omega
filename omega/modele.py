@@ -158,14 +158,16 @@ class database:
                 nouveau_prenom = prenom_entry.get()
                 nouveau_age = age_entry.get()
                 nouveau_classe = combo_classe.get()
-                nouveau_matricule = matricule_entry.get()             
+                nouveau_sexe = element_sexe.get()
+                nouveau_matricule = matricule_entry.get()
+                nouveau_statut = element_statut.get()
                 nouveau_shirt = combo_shirt.get()
                 nouveau_pointure = pointure_entry.get()
                 nouveau_tel = tel_entry.get()
 
                 
-                self.cur.execute("UPDATE beneficiaires SET nom=?, prenom=?, age=?, classe=?, matricule=?,shirt=?, pointure=?, tel=? WHERE nom=? AND prenom=?",
-                                (nouveau_nom, nouveau_prenom, nouveau_age, nouveau_classe, nouveau_matricule, nouveau_shirt, nouveau_pointure, nouveau_tel, nom, prenom))
+                self.cur.execute("UPDATE beneficiaires SET nom=?, prenom=?, age=?, classe=?, sexe=?, matricule=?, statut=?, shirt=?, pointure=?, tel=? WHERE nom=? AND prenom=?",
+                                (nouveau_nom, nouveau_prenom, nouveau_age, nouveau_classe, nouveau_sexe, nouveau_matricule, nouveau_statut, nouveau_shirt, nouveau_pointure, nouveau_tel, nom, prenom))
                 self.connexion.commit()
                 changement.destroy()
                 

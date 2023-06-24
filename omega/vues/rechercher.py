@@ -16,31 +16,29 @@ def create_frame(parent):
     champs.grid(column=2,row=0)
     champs.bind('<KeyRelease>',lambda event:controleur.rechercher(champs.get(),resultats))
 
+    # scrolabilité
+    def make_scrollable(treeview):
+        # Création des scrollbars
+        scrollbar_y = ttk.Scrollbar(rechercher, orient="vertical", command=treeview.yview)
+        scrollbar_x = ttk.Scrollbar(rechercher, orient="horizontal", command=treeview.xview)
+
+        # Configuration des scrollbars pour le treeview
+        treeview.configure(yscrollcommand=scrollbar_y.set, xscrollcommand=scrollbar_x.set)
+
+        # Placement des scrollbars dans le treeview
+        scrollbar_y.pack(side="right", fill="y")
+        scrollbar_x.pack(side="bottom", fill="x")
+
+
     # Gestion d'affichage
-    conteneur_de_affichage=tk.Canvas(rechercher)
-    conteneur_de_affichage.pack(side="left",expand="true",fill="both")
-
-    yscrollbar=ttk.Scrollbar(conteneur_de_affichage,orient="vertical")
-    yscrollbar.pack(side="right",fill="y")
-
-    xscrollbar=ttk.Scrollbar(conteneur_de_affichage,orient="horizontal")
-    xscrollbar.pack(side="bottom",fill="x")
-
-    affichage=tk.Frame(conteneur_de_affichage)
+    
+    affichage=tk.Frame(rechercher)
+   
     affichage.pack(side="left",expand="true",fill="both")
 
     # Gestion du treeview
-
-    conteneur_de_resultats=tk.Canvas(rechercher)
-    conteneur_de_resultats.pack(side="left",expand="true",fill="both")
-
-    yscrollbar=ttk.Scrollbar(conteneur_de_resultats,orient="vertical")
-    yscrollbar.pack(side="right",fill="y")
-
-    xscrollbar=ttk.Scrollbar(conteneur_de_resultats,orient="horizontal")
-    xscrollbar.pack(side="bottom",fill="x")
-
-    resultats = ttk.Treeview(conteneur_de_resultats)
+    resultats = ttk.Treeview(rechercher)
+    make_scrollable(resultats)
     resultats.pack(side="right",expand="true",fill="both")
     resultats.heading('#0',text="Nom et Prenom")
     

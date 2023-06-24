@@ -5,10 +5,11 @@ from . import resume
 from . import aide
 from . import info
 
-
 # Création de la fenêtre principale
 root = tk.Tk()
-root.minsize(width=800,height=600)
+root.minsize(width=800,height=675)
+root.title("CDE Helper")
+root.iconbitmap(default="omega/vues/icon.ico")
 # Création du frame de menu
 menu_frame = tk.Frame(root,bg="#808040")
 menu_frame.pack(side="left",fill="y")
